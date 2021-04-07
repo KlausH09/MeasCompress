@@ -1,0 +1,15 @@
+# Build directory
+build
+dist
+tests/bin
+
+# Python
+*.egg-info
+__pycache__
+.pytest_cache
+.eggs
+*.pyd
+venv/
+
+# VS Code
+.vscode
