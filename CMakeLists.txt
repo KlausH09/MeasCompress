@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.10.0)
-project(python_cpp_example) # FIXME must be equal with the py module name!!
+project(MeasCompress)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_subdirectory(extern/pybind11)
 add_subdirectory(extern/catch2)

@@ -1,6 +1,8 @@
 set(TARGET "${PROJECT_NAME}_test")
-add_executable(${TARGET} 
-    test_math.cpp
+add_executable(${TARGET}
+    test_compressor.cpp
+    test_dependency.cpp
+    test_line.cpp
 )
 target_link_libraries(${TARGET} 
     PRIVATE Catch2::Catch2WithMain

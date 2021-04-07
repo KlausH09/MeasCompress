@@ -43,7 +43,7 @@ class CMakeBuild(build_ext):
 
         if platform.system() == "Windows":
             cmake_version = LooseVersion(re.search(r'version\s*([\d.]+)',
-                                         out.decode()).group(1))
+                                                   out.decode()).group(1))
             if cmake_version < '3.1.0':
                 raise RuntimeError("CMake >= 3.1.0 is required on Windows")
 
@@ -114,7 +114,7 @@ class CMakeBuild(build_ext):
         copymode(src_file, dest_file)
 
 
-MODULE_NAME = 'python_cpp_example'  # FIXME
+MODULE_NAME = 'MeasCompress'
 setup(
     name=MODULE_NAME,
     packages=find_packages('src'),
