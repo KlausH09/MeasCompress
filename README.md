@@ -33,7 +33,7 @@ python ./setup.py pytest
 
 ```python
 import numpy as np
-from MeasCompress.bindings import Compressor, Dependency
+from MeasCompress import Compressor, Dependency
 
 def GenData():
     y = np.array([])

@@ -1,6 +1,6 @@
 # pylint: disable=missing-module-docstring, missing-function-docstring
 import pytest
-from MeasCompress.bindings import Dependency
+from MeasCompress import Dependency
 
 
 def test_constructor():

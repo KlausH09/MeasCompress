@@ -1,10 +1,10 @@
 # pylint: disable=missing-module-docstring, missing-function-docstring
 import pytest
-from MeasCompress.bindings import Compressor, Dependency
+from MeasCompress import Compressor, Dependency
 
 
 def allclose(a, b):
-    if size(a) != size(b):
+    if len(a) != len(b):
         return False
     for e1, e2 in zip(a, b):
         if abs(e1 - e2) > 1e-8:
