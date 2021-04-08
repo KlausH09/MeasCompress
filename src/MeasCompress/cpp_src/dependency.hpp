@@ -82,9 +82,9 @@ namespace measCompress
          * @param y data of a timeseries
          * @param tol allowed approximation tolerance/error
          */
-        Dependency(std::vector<T> y, T tol)
-            : y(std::move(y)),
-              tol(std::move(tol))
+        Dependency(std::vector<T> y_, T tol_)
+            : y(std::move(y_)),
+              tol(std::move(tol_))
         {
             if (y.size() < 2)
             {

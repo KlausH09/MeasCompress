@@ -1,8 +1,7 @@
 """a example python script which will be a part of the installed module
 """
 
-# FIXME
-from python_cpp_example import bindings
+from MeasCompress import bindings
 
 
 def say_hello():
@@ -11,4 +10,4 @@ def say_hello():
     Returns:
         str: says hello to you
     """
-    return f"Hello world! {bindings.add(1,2)}"
+    return f"Hello world!"

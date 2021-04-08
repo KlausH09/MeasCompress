@@ -11,7 +11,7 @@ void equal(const std::vector<T> &a, const std::vector<T> &b)
     REQUIRE(a.size() == b.size());
     for (std::size_t i = 0; i < a.size(); ++i)
     {
-        REQUIRE(a[i] == Catch::Approx(b[i]));
+        REQUIRE(a[i] == Approx(b[i]));
     }
 }
 
