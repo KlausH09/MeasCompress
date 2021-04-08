@@ -10,14 +10,14 @@ using T = double;
 using Dependency = measCompress::Dependency<T>;
 using Compressor = measCompress::Compressor<T>;
 
-PYBIND11_PLUGIN(bindings)
+PYBIND11_MODULE(bindings, m)
 {
-  py::module m("bindings", R"doc(
-       MeasCompress C++ implementation
-        -----------------------
-        .. currentmodule:: bindings
-        .. autosummary::
-    )doc");
+  m.doc() = R"doc(
+      MeasCompress C++ implementation
+      -----------------------
+      .. currentmodule:: bindings
+      .. autosummary::
+    )doc";
 
   py::class_<Dependency>(m, "Dependency")
       .def(py::init<std::vector<T>, T>()); // TODO docstring
@@ -30,6 +30,4 @@ PYBIND11_PLUGIN(bindings)
       .def("GetPos", &Compressor::GetPos)
       .def("GetTimeFit", &Compressor::GetTimeFit)
       .def("GetTimeOrigin", &Compressor::GetTimeOrigin); // TODO docstring
-
-  return m.ptr();
 }
