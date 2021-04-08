@@ -25,11 +25,11 @@ PYBIND11_PLUGIN(bindings)
   py::class_<Compressor>(m, "Compressor")
       .def(py::init<>())
       .def("Fit", &Compressor::Fit)
-      .def("Fit", &Compressor::TransformNoFit)
-      .def("Fit", &Compressor::Transform)
-      .def("Fit", &Compressor::GetPos)
-      .def("Fit", &Compressor::GetTimeFit)
-      .def("Fit", &Compressor::GetTimeOrigin); // TODO docstring
+      .def("TransformNoFit", &Compressor::TransformNoFit)
+      .def("Transform", &Compressor::Transform)
+      .def("GetPos", &Compressor::GetPos)
+      .def("GetTimeFit", &Compressor::GetTimeFit)
+      .def("GetTimeOrigin", &Compressor::GetTimeOrigin); // TODO docstring
 
   return m.ptr();
 }
