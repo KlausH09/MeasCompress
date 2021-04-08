@@ -12,9 +12,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: init
-        run: git submodule update --init --recursive
+        run: |
+          sudo apt update
+          sudo apt install g++-10
+          git submodule update --init --recursive
       - name: build and test
         run: python3 setup.py pytest
+        env:
+          CXX: g++-10
 
   build-windows:
     runs-on: windows-2019
@@ -26,7 +31,7 @@ jobs:
         run: py setup.py pytest
 
   build-mac:
-    runs-on: macos-10.15
+    runs-on: macos-11.0
     steps:
       - uses: actions/checkout@v2
       - name: init
