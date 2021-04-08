@@ -1,32 +1,9 @@
-# pybind11_cpp_module_template
+# MeasCompress
 
 ## Initialize
 
-> create a new repo from this template and clone it recursively:
-
 ```bash
-git clone XXX
 git submodule update --init --recursive
-```
-
-or
-
-> copy the files and add `pybind11` and optional `catch2` as submodule:
-
-```bash
-# pybind11
-git submodule add https://github.com/pybind/pybind11.git ./extern/pybind11
-cd extern/pybind11
-git fetch --tags
-git checkout v2.6.2
-cd ../..
-
-# catch
-git submodule add https://github.com/catchorg/Catch2.git ./extern/catch2
-cd extern/catch2
-git fetch --tags
-git checkout v2.13.4
-cd ../..
 ```
 
 ## Installation
@@ -52,8 +29,22 @@ To execute all unit tests, run the following command:
 python ./setup.py pytest
 ```
 
-add to `./vscode/settings.json`
+## Usage
 
-```json
-    "python.testing.unittestEnabled": true
+```python
+import numpy as np
+from MeasCompress.bindings import Compressor, Dependency
+
+def GenData():
+    y = np.array([])
+    for i in range(10):
+        y = np.r_[y, i + np.random.rand(100) * 0.01]
+    t = np.linspace(0, 100, y.size)
+    return t, y
+
+t, y = GenData()
+dep = Dependency(y, 0.1)
+comp = Compressor().Fit(t, [dep])
+t_compressed = comp.GetTimeFit()
+y_compressed = comp.Transform(y)
 ```
