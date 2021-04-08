@@ -173,8 +173,8 @@ namespace measCompress
             {
                 const auto i0 = position[i];
                 const auto i1 = position[i + 1] + 1;
-                const auto t_ = std::span(t.begin() + i0, t.begin() + i1);
-                const auto y_ = std::span(y.begin() + i0, y.begin() + i1);
+                const auto t_ = std::span<const T>(t.begin() + i0, t.begin() + i1);
+                const auto y_ = std::span<const T>(y.begin() + i0, y.begin() + i1);
 
                 const auto line = Line<T>::Fit(t_, y_);
                 const auto y0 = line.GetY(t_.front());

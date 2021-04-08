@@ -122,8 +122,8 @@ namespace measCompress
                 return true;
             }
 
-            auto t_ = std::span(t.begin() + i0, t.begin() + i1);
-            auto y_ = std::span(y.begin() + i0, y.begin() + i1);
+            auto t_ = std::span<const T>(t.begin() + i0, t.begin() + i1);
+            auto y_ = std::span<const T>(y.begin() + i0, y.begin() + i1);
 
             auto line = Line<T>::Fit(t_, y_);
             auto error = line.GetMaxError(t_, y_);
