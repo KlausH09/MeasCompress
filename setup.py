@@ -3,7 +3,7 @@
 """ standard script for install the c++ and python code as module in a
 python environment. e.g.
 
-pip install .
+pip install -e .
 # or
 python ./setup.py install
 """

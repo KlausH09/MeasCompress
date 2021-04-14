@@ -18,7 +18,7 @@ or
 
 ```bash
 # delete ./build dictionary before!!
-pip3 install .
+pip3 install -e .
 ```
 
 ## Tests
