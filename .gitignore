@@ -11,5 +11,8 @@ __pycache__
 *.pyd
 venv/
 
+# Binaries
+*.so
+
 # VS Code
 .vscode
