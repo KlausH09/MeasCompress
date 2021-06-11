@@ -96,39 +96,23 @@ namespace measCompress
             }
 
             t = std::move(t_);
-            position.resize(0);
-            position.reserve(n);
+
+            position.clear();
+            position.reserve(static_cast<std::size_t>(n * 0.1));
             position.push_back(0);
 
-            auto check = [this, &deps](std::size_t i0, std::size_t i1) {
-                for (const auto &dep : deps)
-                {
-                    if (!dep.Check(t, i0, i1))
-                    {
-                        return false;
-                    }
-                }
-                return true;
-            };
+            std::size_t last_step = 64;
 
             while (true)
             {
                 const auto i0 = position.back();
-                for (auto i1 = i0 + 2;; ++i1)
-                {
-                    if (i1 >= n)
-                    {
-                        if (position.back() != n - 1)
-                            position.push_back(n - 1);
-                        return *this;
-                    }
-                    if (!check(i0, i1 + 1))
-                    {
-                        position.push_back(i1 - 1);
-                        break;
-                    }
-                }
+                const auto i1 = binary_search(deps, i0, last_step);
+                last_step = i1 - i0;
+                position.push_back(i1 - 1);
+                if (i1 == t.size())
+                    break;
             }
+            return *this;
         }
 
         /**
@@ -206,6 +190,47 @@ namespace measCompress
          * @return std::vector<T> 
          */
         std::vector<T> GetTimeFit() const { return TransformNoFit(t); }
+
+    private:
+        std::size_t binary_search(const std::vector<Dependency<T>> &deps,
+                                  std::size_t i0, std::size_t last_step)
+        {
+            auto check = [this, &deps, i0](std::size_t i1)
+            {
+                for (const auto &dep : deps)
+                    if (!dep.Check(t, i0, i1))
+                        return false;
+                return true;
+            };
+            // consider: check(a) is always true
+
+            std::size_t a = i0 + 2;
+            std::size_t b = std::min(a + last_step, t.size());
+            if (a >= t.size())
+                return t.size();
+
+            // go with big steps forward until dependency are false
+            while (check(b))
+            {
+                if (b == t.size())
+                    return b;
+                a = b;
+
+                // increase stepsize with factor 2
+                b = std::min(a + (a - i0), t.size());
+            }
+
+            // binary search
+            while (a + 1 < b)
+            {
+                auto m = (a + b) / 2;
+                if (check(m))
+                    a = m;
+                else
+                    b = m;
+            }
+            return a;
+        }
 
     private:
         std::vector<std::size_t> position;
